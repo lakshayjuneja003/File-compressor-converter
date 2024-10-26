@@ -71,18 +71,18 @@ const ConvertImage = () => {
         }).then((response) => {
           const blob = new Blob([response.data], { type: response.data.type });
           const url = window.URL.createObjectURL(blob);
-
+        
           setFileState((prevState) => ({
             uploadedFiles: [
               ...prevState.uploadedFiles,
               {
-                fileName: `${file.name}.${format}`,
+                fileName: `${file.name.split('.')[0]}.${format}`, // Updated here
                 downloadUrl: url,
                 error: null,
               },
             ],
           }));
-        });
+        });        
       }
     } catch (error) {
       console.error("Error uploading and converting file:", error);

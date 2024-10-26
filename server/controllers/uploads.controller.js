@@ -1,7 +1,6 @@
 import tinify from "tinify"; 
 import sharp from "sharp"
 import path from "path"
-import fs from 'fs';
 export const compressImage =  async (req, res) => {
   try {
     const fileBuffer = req.file.buffer; // Access the uploaded file buffer
@@ -25,13 +24,15 @@ export const compressImage =  async (req, res) => {
 }
 
 // Convert Image Controller
-
 export const convertImage = async (req, res) => {
   try {
     const { format } = req.params; // Get the desired format (webp, jpeg, png)
     const { buffer, originalname } = req.file; // Get the file buffer from the uploaded file
-    const fileName = originalname.split('.')[0]; // Extract the file name
-    console.log(fileName)
+
+    // Extract the base name without the extension
+    const fileName = path.parse(originalname).name;
+    console.log(fileName);
+
     const width = 1024; // Resize width
     const quality = 70; // Compression quality for lossy formats
 
@@ -56,7 +57,7 @@ export const convertImage = async (req, res) => {
     // Set response headers to prompt file download
     res.set({
       "Content-Type": `image/${format}`,
-      "Content-Disposition": `attachment; filename=${fileName}.${format}`,
+      "Content-Disposition": `attachment; filename=${fileName}.${format}`, // use base name + new extension
     });
 
     // Send the converted image buffer as response
