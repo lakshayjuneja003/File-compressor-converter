@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #downloadBtn {
+            background-color: #28a745;
+            display: none; /* Hidden initially */
+        }
+
+        #downloadBtn:hover {
+            background-color: #218838;
+        }
+
+        .message {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload and Download File</h1>
+    <form id="uploadForm">
+        <input type="file" name="file" id="fileInput" required />
+        <button type="submit">Upload</button>
+    </form>
+    
+    <button id="downloadBtn">Download File</button>
+    <div class="message" id="message"></div>
+    
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const messageDiv = document.getElementById('message');
+        let fileUrl = '';
+
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(uploadForm);
+            console.log(formData.toString());
+            
+            try {
+                const response = await fetch('http://localhost:3000/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to upload file');
+                }
+
+                const data = await response.json();
+                fileUrl = data.url; // Save the URL of the uploaded file
+                console.log('Uploaded file URL:', fileUrl);
+                downloadBtn.style.display = 'block'; // Show the download button
+                messageDiv.textContent = 'File uploaded successfully! Click the button to download.';
+                messageDiv.style.color = '#28a745'; // Green for success
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                messageDiv.textContent = 'Error uploading file.';
+                messageDiv.style.color = '#dc3545'; // Red for error
+            }
+        });
+
+        downloadBtn.addEventListener('click', async () => {
+            if (fileUrl) {
+                try {
+                    const response = await fetch(`http://localhost:3000/download?url=${encodeURIComponent(fileUrl)}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to download file');
+                    }
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'downloaded_file'; // Set the name of the downloaded file
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url); // Free up memory
+                    messageDiv.textContent = 'Downloading file...';
+                    messageDiv.style.color = '#007bff'; // Blue for downloading
+                } catch (error) {
+                    console.error('Error downloading file:', error);
+                    messageDiv.textContent = 'Error downloading file.';
+                    messageDiv.style.color = '#dc3545'; // Red for error
+                }
+            }
+        });
+    </script>
+</body>
+</html>

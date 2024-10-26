@@ -1,0 +1,454 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arima", system-ui;
+}
+.parent{
+  margin: 0 auto;
+}
+.crousel{
+  width: 100%;
+  max-height:500px;
+  padding: 50px;
+  background-color: white;
+  position: relative;
+  background: linear-gradient(1turn, rgba(140, 201, 56, .2), rgba(140, 201, 56, 0) 20%), linear-gradient(180deg, #8dcfeb, #fefeff);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.pandaimg{
+  position: absolute;
+  width: 300px;
+  right: -120px;
+  bottom: 0;
+  z-index: 1;
+}
+.cloudimg{
+  position: absolute;
+  width: 400px;
+  left: 300px;
+  top: 0;
+}
+.bambooimg{
+  position: absolute;
+  width: 200px;
+  left: -100px;
+  bottom: 0;
+}
+.crouseldiv{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.leftcrousel{
+  width: 40%;
+}
+.leftcrouselitem{
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+.leftcrouselitem button{
+  width: 150px;
+  padding: 10px 10px;
+  background-color: #8cc938;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.max-size{
+  font-size: 15px;
+  font-weight: 200;
+
+}
+.rightcrouselitems{
+  width: 100%;
+  z-index: 100;
+  padding: 20px;
+}
+.filebox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.file-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  border: 2px dashed #8cc938; /* Dashed border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Light black shadow */
+  cursor: pointer;
+  padding: 20px; 
+  z-index: 1;
+  border-radius: 10px;
+  background-color: white; 
+}
+
+.file-input input {
+  display: none;
+}
+
+.file-input img {
+  min-width: 100px; 
+  margin: 20px 20px;
+  margin-bottom: 10px;
+}
+.convert{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: white;
+  width: 400px;
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+.upload-status {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 30px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.upload-status .button.upload-button {
+  padding: 12px 25px;
+  background-color: #5cb85c;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.upload-status .button.upload-button:hover {
+  background-color: #4cae4c;
+}
+
+.progress-container {
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px; /* Smaller height */
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  overflow: hidden;
+  appearance: none;
+}
+
+.progress-bar::-webkit-progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
+
+.progress-bar::-webkit-progress-value {
+  background: linear-gradient(90deg, #6a9ff8, #0573b3); /* Gradient effect */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.progress-bar::-moz-progress-bar {
+  background: linear-gradient(90deg, #6a9ff8, #0573b3); /* For Firefox */
+  border-radius: 10px;
+}
+
+
+.uploaded-files {
+  margin-top: 25px;
+}
+
+.uploaded-files .file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.extrainfo {
+  display: flex;
+  gap: 15px;
+}
+
+.extrainfo .file-type,
+.extrainfo .file-size {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.download-link {
+  text-decoration: none;
+}
+
+.download-link .button.download-button {
+  padding: 8px 20px;
+  background-color: #0692e5;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-link .button.download-button:hover {
+  background-color: #0573b3;
+}
+
+.error-message {
+  color: #d9534f;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+
+.content {
+  padding: 20px;
+  margin: 20px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentdiv {
+  text-align: center;
+  max-width: 900px;
+}
+
+.contentproduct {
+  color: #0692e5;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+}
+
+.contentoptimization {
+  font-size: 2.5rem;
+  letter-spacing: 0.1rem;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.contenttext {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.5rem;
+  margin-bottom: 30px;
+}
+/* Format selection styling */
+.format-selection {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.format-selection label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: none; /* Hide the default checkbox */
+}
+
+.format {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 2px solid #8cc938;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.checkbox:checked + .format {
+  background-color: #8cc938;
+  color: white;
+  border-color: #8cc938;
+}
+
+.checkbox:focus + .format {
+  box-shadow: 0 0 5px #8cc938;
+}
+
+.webpro {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.webprocontent {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.webprocontent img {
+  width: 80px;
+}
+
+.webprocontent h3 span{
+  font-size: 2rem;
+  font-weight: 800;
+}
+.webprocontent h3{
+  font-weight: 200;
+  font-size: 1rem;
+}
+
+.webprocontent button {
+  padding: 10px 20px;
+  background-color: #8cc938;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.footer-text{
+  padding: 20px 20px;
+  font-size: 18px;
+}
+@media (max-width: 1024px) {
+  .crousel{
+      min-height: 300px;
+      padding: 20px;
+  }
+  .crouseldiv {
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+  }
+  .file-input {
+    width: 250px;
+  }
+  .file-input img {
+    max-width: 100px; 
+  }
+  .convert{
+    width: 250px;
+  }
+  .leftcrousel,
+  .rightcrouselitems {
+      width: 100%;
+      text-align: center;
+  }
+  .leftcrouselitem{
+    align-items: center;
+  }
+
+  .pandaimg,
+  .cloudimg,
+  .bambooimg {
+      display: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .crousel{
+      min-height: 200px;
+      padding: 10px;
+  }
+  .crouseldiv{
+      padding: 20px;
+  }
+  .contentoptimization {
+      font-size: 2rem;
+  }
+  .webprocontent {
+      display: block;
+      align-items: center;
+      justify-content: space-around;
+      gap: 10px;
+  }
+  .file-input {
+      width: 250px;
+  }
+  .convert{
+    width: 250px;
+  }
+  .convert h3{
+    font-size: 12px;
+  }
+
+  .contenttext {
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .crousel{
+      min-height: 120px;
+      padding: 8px;
+  }
+  .crouseldiv{
+      padding: 10px;
+  }
+  .contentoptimization {
+      font-size: 1.5rem;
+  }
+  .leftcrouselitem{
+    align-items: center;
+  }
+  .webprocontent {
+      flex-direction: column;
+      gap: 15px;
+  }
+  .webprocontent h3{
+      font-weight: 200;
+      font-size: 0.5rem;
+  }
+  .webprocontent h3 span{
+      font-size: 1rem;
+      font-weight: 700;
+  }
+
+  .webprocontent img {
+      width: 60px;
+  }
+}
